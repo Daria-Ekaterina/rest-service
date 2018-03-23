@@ -17,7 +17,6 @@ public class CalculatorController {
     }
 
     @RequestMapping("/add")
-    //@RequestParam(value = "arg1") int arg1, @RequestParam(value = "arg2") int arg2
     private void add(@RequestParam(value = "arg1") int arg1, @RequestParam(value = "arg2") int arg2){
         service.add(arg1,arg2);
     }
