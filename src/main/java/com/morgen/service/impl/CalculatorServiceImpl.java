@@ -15,8 +15,9 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     @Override
-    public void add(int arg1, int arg2) {
+    public int add(int arg1, int arg2) {
         sum=arg1+arg2;
         System.out.println(sum);
+        return sum;
     }
 }
