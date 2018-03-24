@@ -1,6 +1,6 @@
 package com.morgen.controller;
 
-import org.springframework.validation.BindingResult;
+import com.morgen.utils.Response;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +8,6 @@ import com.morgen.service.CalculatorService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @RestController
 public class CalculatorController {
@@ -19,23 +18,30 @@ public class CalculatorController {
         this.service = calculatorService;
     }
 
+    //TODO добавить result перемменную, для передачи в качестве параметра Response
+    //TODO покрыть тестами
+
     @RequestMapping("/add")
-    private int add(@RequestParam(value = "firstArg") @Valid Integer firstArg, @RequestParam(value = "secondArg") @Valid Integer secondArg) {
-        return service.add(firstArg, secondArg);
+    private Response add(@RequestParam(value = "firstArgument") @Valid Integer firstArgument,
+                         @RequestParam(value = "secondArgument") @Valid Integer secondArgument) {
+        return new Response(service.add(firstArgument, secondArgument));
     }
 
     @RequestMapping("/subtract")
-    private int subtract(@RequestParam(value = "firstArg") @Valid Integer firstArg, @RequestParam(value = "secondArg") @Valid Integer secondArg) {
-        return service.subtract(firstArg, secondArg);
+    private Response subtract(@RequestParam(value = "firstArgument") @Valid Integer firstArgument,
+                              @RequestParam(value = "secondArgument") @Valid Integer secondArgument) {
+        return new Response(service.subtract(firstArgument, secondArgument));
     }
 
     @RequestMapping("/multiply")
-    private int multiply(@RequestParam(value = "firstArg") @Valid Integer firstArg, @RequestParam(value = "secondArg") @Valid Integer secondArg) {
-        return service.multiply(firstArg, secondArg);
+    private Response multiply(@RequestParam(value = "firstArgument") @Valid Integer firstArgument,
+                              @RequestParam(value = "secondArgument") @Valid Integer secondArgument) {
+        return new Response(service.multiply(firstArgument, secondArgument));
     }
 
     @RequestMapping("/divide")
-    private float divide(@RequestParam(value = "firstArg") @Valid Integer firstArg, @RequestParam(value = "secondArg") @Valid Integer secondArg) {
-        return service.divide(firstArg, secondArg);
+    private Response divide(@RequestParam(value = "firstArgument") @Valid Double firstArgument,
+                            @RequestParam(value = "secondArgument") @Valid Double secondArgument) {
+        return new Response(service.divide(firstArgument, secondArgument));
     }
 }

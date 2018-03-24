@@ -1,7 +1,11 @@
 package com.morgen.service;
+
 public interface CalculatorService {
-    int add(Integer firstArg, Integer secondArg);
-    int subtract(Integer firstArg,Integer secondArg);
-    int multiply(Integer firstArg,Integer secondArg);
-    float divide(Integer firstArg,Integer secondArg);
+    int add(Integer firstArgument, Integer secondArgument);
+
+    int subtract(Integer firstArgument, Integer secondArgument);
+
+    int multiply(Integer firstArgument, Integer secondArgument);
+
+    double divide(Double firstArgument, Double secondArgument);
 }

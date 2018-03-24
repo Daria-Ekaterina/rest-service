@@ -3,32 +3,31 @@ package com.morgen.service.impl;
 import org.springframework.stereotype.Service;
 import com.morgen.service.CalculatorService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 @Service("calculatorService")
 public class CalculatorServiceImpl implements CalculatorService {
+
 //TODO add a check for NULL
+
     @Override
-    public int add(Integer intFirstArg, Integer intSecondArg) {
-        return intFirstArg + intSecondArg;
+    public int add(Integer FirstArgument, Integer SecondArgument) {
+        return FirstArgument + SecondArgument;
     }
 
     @Override
-    public int subtract(Integer firstArg, Integer secondArg) {
-        return firstArg - secondArg;
+    public int subtract(Integer firstArgument, Integer secondArgument) {
+        return firstArgument - secondArgument;
     }
 
     @Override
-    public int multiply(Integer firstArg, Integer secondArg) {
-        return firstArg * secondArg;
+    public int multiply(Integer firstArgument, Integer secondArgument) {
+        return firstArgument * secondArgument;
     }
 
     @Override
-    public float divide(Integer firstArg, Integer secondArg) {
-        if (secondArg != 0) {
-            return (float) firstArg / secondArg;
+    public double divide(Double firstArgument, Double secondArgument) {
+        if (secondArgument != 0) {
+            return (double) firstArgument / secondArgument;
         }
-        return 0;
+        return 0.0;
     }
 }
