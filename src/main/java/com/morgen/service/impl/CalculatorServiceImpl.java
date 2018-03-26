@@ -3,9 +3,11 @@ package com.morgen.service.impl;
 import org.springframework.stereotype.Service;
 import com.morgen.service.CalculatorService;
 
+import javax.validation.constraints.NotNull;
+
 @Service("calculatorService")
 public class CalculatorServiceImpl implements CalculatorService {
-
+@NotNull
 //TODO add a check for NULL
 
     @Override
