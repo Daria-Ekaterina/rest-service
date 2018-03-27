@@ -1,5 +1,6 @@
 package com.morgen.service;
 
+
 public interface CalculatorService {
     int add(Integer firstArgument, Integer secondArgument);
 

@@ -1,7 +1,9 @@
-package com.morgen.model;
+package com.morgen.controller;
 
 import com.morgen.service.CalculatorService;
+import org.springframework.stereotype.Service;
 
+@Service ("calculator")
 public class Calculator implements CalculatorService {
     private int firstArgument;
     private int secondArgument;

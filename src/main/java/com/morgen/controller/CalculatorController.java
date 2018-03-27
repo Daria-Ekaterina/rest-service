@@ -1,14 +1,23 @@
 package com.morgen.controller;
 
-import com.morgen.model.Calculator;
+import com.morgen.service.CalculatorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.inject.Inject;
+
 @Controller
 public class CalculatorController {
     //TODO покрыть тестами
+   // private CalculatorService service;
+    private Calculator calculator;
+
+    @Inject
+    public CalculatorController(Calculator calculator){
+        this.calculator = calculator;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -17,22 +26,22 @@ public class CalculatorController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public ModelAndView add() {
-        return new ModelAndView("add", "command", new Calculator()); //WTF magic??
+        return new ModelAndView("add", "command", calculator); //WTF magic??
     }
 
     @RequestMapping(value = "subtract", method = RequestMethod.GET)
     public ModelAndView subtract() {
-        return new ModelAndView("subtract", "command", new Calculator()); //WTF magic??
+        return new ModelAndView("subtract", "command", calculator); //WTF magic??
     }
 
     @RequestMapping(value = "multiply", method = RequestMethod.GET)
     public ModelAndView multiply() {
-        return new ModelAndView("multiply", "command", new Calculator()); //WTF magic??
+        return new ModelAndView("multiply", "command", calculator); //WTF magic??
     }
 
     @RequestMapping(value = "divide", method = RequestMethod.GET)
     public ModelAndView divide() {
-        return new ModelAndView("divide", "command", new Calculator()); //WTF magic??
+        return new ModelAndView("divide", "command", calculator); //WTF magic??
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -74,4 +83,5 @@ public class CalculatorController {
                 calculator.divide((double) calculator.getFirstArgument(), (double) calculator.getSecondArgument()));
         return "result";
     }
+
 }
