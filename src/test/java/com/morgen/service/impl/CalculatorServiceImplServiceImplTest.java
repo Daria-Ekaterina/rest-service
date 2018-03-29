@@ -5,9 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class CalculatorServiceImplTest {
+public class CalculatorServiceImplServiceImplTest {
     private CalculatorServiceImpl calculatorService;
 
     @Before
