@@ -19,7 +19,7 @@ public class CalculatorController {
     }
 
     //TODO добавить result перемменную, для передачи в качестве параметра Response
-    //TODO покрыть тестами
+    //TODO покрыть tests
 
     @RequestMapping("/add")
     private Response add(@RequestParam(value = "firstArgument") @Valid Integer firstArgument,
