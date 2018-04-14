@@ -1,6 +1,10 @@
 package com.morgen.controller;
 
+import com.morgen.bean.Question;
+import com.morgen.service.QuestionService;
 import com.morgen.utils.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +12,7 @@ import com.morgen.service.CalculatorService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class CalculatorController {
@@ -18,6 +23,23 @@ public class CalculatorController {
         this.service = calculatorService;
     }
 
+    @Autowired
+    QuestionService cityService;
+
+    @RequestMapping("/questions")
+    public String findCities(Model model) {
+
+        List<Question> questions = (List<Question>) cityService.findAll();
+        Question result = questions.get(terRandomQuestion(questions.size()));
+        System.out.println(result);
+        model.addAttribute("question", result);
+
+        return "questions";
+    }
+
+    private int terRandomQuestion(int size) {
+        return (int) (Math.random()*size);
+    }
     //TODO добавить result перемменную, для передачи в качестве параметра Response
     //TODO покрыть tests
 
