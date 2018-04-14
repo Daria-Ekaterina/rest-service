@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("questionService")
+@Service
 public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
@@ -20,24 +20,4 @@ public class QuestionServiceImpl implements QuestionService {
 
         return questions;
     }
-
-//    @Override
-//    public void save(Question question) {
-//        repository.save(question);
-//    }
-
-//    @Service
-//    public class CityService implements ICityService {
-//
-//        @Autowired
-//        private CityRepository repository;
-//
-//        @Override
-//        public List<City> findAll() {
-//
-//            List<City> cities = (List<City>) repository.findAll();
-//
-//            return cities;
-//        }
-//    }
 }

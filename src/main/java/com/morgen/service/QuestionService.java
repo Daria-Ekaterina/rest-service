@@ -5,9 +5,6 @@ import com.morgen.bean.Question;
 import java.util.List;
 
 public interface QuestionService {
-     List<Question> findAll();
-
-    // void save(Question question);
-
+    List<Question> findAll();
 
 }
