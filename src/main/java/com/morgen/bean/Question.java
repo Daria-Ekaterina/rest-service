@@ -11,10 +11,16 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    private String answer;
 
     public Question() {
     }
 
+
+    public Question(String name, String answer) {
+        this.name = name;
+        this.answer=answer;
+    }
 
     public long getId() {
         return id;
@@ -32,10 +38,13 @@ public class Question {
         this.name = name;
     }
 
-    public Question(String name) {
-        this.name = name;
+    public String getAnswer() {
+        return answer;
     }
 
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -64,12 +73,13 @@ public class Question {
         int hash = 7;
         hash = 79 * hash + Objects.hashCode(this.id);
         hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.answer);
         return hash;
     }
 
     @Override
     public String toString() {
         return "Question{" + "id=" + id + ", name=" + name
-                + '}';
+                + "answer="+answer+'}';
     }
 }

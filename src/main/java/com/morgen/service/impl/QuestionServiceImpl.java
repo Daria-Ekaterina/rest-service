@@ -20,4 +20,11 @@ public class QuestionServiceImpl implements QuestionService {
 
         return questions;
     }
+
+    @Override
+    public Question addQuestion(Question question) {
+        //TODO сделать валидацию на поля
+        repository.save(question);
+        return null;
+    }
 }

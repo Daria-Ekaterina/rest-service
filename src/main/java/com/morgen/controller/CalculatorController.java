@@ -4,11 +4,12 @@ import com.morgen.bean.Question;
 import com.morgen.service.CalculatorService;
 import com.morgen.service.QuestionService;
 import com.morgen.utils.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import java.util.List;
 public class CalculatorController {
 
     private CalculatorService service;
+    private final Logger LOGGER=LoggerFactory.getLogger(CalculatorController.class);
 
     @Inject
     public CalculatorController(CalculatorService calculatorService) {
@@ -27,13 +29,22 @@ public class CalculatorController {
     @Autowired
     QuestionService questionService;
 
-    @RequestMapping("/questions")
+    @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public String findQuestion(Model model) {
         List<Question> questions = (List<Question>) questionService.findAll();
         Question result = questions.get(terRandomQuestion(questions.size()));
+        LOGGER.info(result.getName());
         model.addAttribute("question", result);
         return "questions";
     }
+
+    @RequestMapping(value = "/question/add", method = RequestMethod.POST)
+    public String addQuestion(@RequestBody Question question) {
+        Question question1=new Question();
+        questionService.addQuestion(question1);
+        return null;
+    }
+
 
     private int terRandomQuestion(int size) {
         return (int) (Math.random() * size);
@@ -49,6 +60,7 @@ public class CalculatorController {
         model.addAttribute("sum", service.add(firstArgument, secondArgument));
         return "add";
     }
+
 
     //TODO доделать методы под веб интерфейс
 
@@ -69,4 +81,5 @@ public class CalculatorController {
                             @RequestParam(value = "secondArgument") @Valid Double secondArgument) {
         return new Response(service.divide(firstArgument, secondArgument));
     }
+
 }
