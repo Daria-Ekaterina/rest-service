@@ -1,6 +1,6 @@
 package com.morgen.controller;
 
-import com.morgen.bean.Question;
+import com.morgen.model.Question;
 import com.morgen.service.CalculatorService;
 import com.morgen.service.QuestionService;
 import com.morgen.utils.Response;
@@ -18,35 +18,33 @@ import java.util.List;
 @Controller
 public class CalculatorController {
 
-    private CalculatorService service;
+    private final CalculatorService calculatorService;
     private final Logger LOGGER=LoggerFactory.getLogger(CalculatorController.class);
+
+    @Autowired
+    private QuestionService questionService;
 
     @Inject
     public CalculatorController(CalculatorService calculatorService) {
-        this.service = calculatorService;
+        this.calculatorService = calculatorService;
     }
-
-    @Autowired
-    QuestionService questionService;
 
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public String findQuestion(Model model) {
-        List<Question> questions = (List<Question>) questionService.findAll();
-        Question result = questions.get(terRandomQuestion(questions.size()));
-        LOGGER.info(result.getName());
+        List<Question> questions = questionService.findAll();
+        Question result = questions.get(getRandomQuestion(questions.size()));
+        LOGGER.info("Get random question from list: {}",result.getName());
         model.addAttribute("question", result);
         return "questions";
     }
 
     @RequestMapping(value = "/question/add", method = RequestMethod.POST)
     public String addQuestion(@RequestBody Question question) {
-        Question question1=new Question();
-        questionService.addQuestion(question1);
         return null;
     }
 
 
-    private int terRandomQuestion(int size) {
+    private int getRandomQuestion(int size) {
         return (int) (Math.random() * size);
     }
     //TODO добавить result перемменную, для передачи в качестве параметра Response
@@ -55,9 +53,11 @@ public class CalculatorController {
     @RequestMapping("/add")
     private String add(Model model, @RequestParam(value = "firstArgument") @Valid Integer firstArgument,
                        @RequestParam(value = "secondArgument") @Valid Integer secondArgument) {
+        int result=calculatorService.add(firstArgument,secondArgument);
+        LOGGER.info("First argument: {}, second argument {}, action - add,result: {},result",firstArgument,secondArgument,result);
         model.addAttribute("firstArgument", firstArgument);
         model.addAttribute("secondArgument", secondArgument);
-        model.addAttribute("sum", service.add(firstArgument, secondArgument));
+        model.addAttribute("sum", result);
         return "add";
     }
 
@@ -67,19 +67,19 @@ public class CalculatorController {
     @RequestMapping("/subtract")
     private Response subtract(@RequestParam(value = "firstArgument") @Valid Integer firstArgument,
                               @RequestParam(value = "secondArgument") @Valid Integer secondArgument) {
-        return new Response(service.subtract(firstArgument, secondArgument));
+        return new Response(calculatorService.subtract(firstArgument, secondArgument));
     }
 
     @RequestMapping("/multiply")
     private Response multiply(@RequestParam(value = "firstArgument") @Valid Integer firstArgument,
                               @RequestParam(value = "secondArgument") @Valid Integer secondArgument) {
-        return new Response(service.multiply(firstArgument, secondArgument));
+        return new Response(calculatorService.multiply(firstArgument, secondArgument));
     }
 
     @RequestMapping("/divide")
     private Response divide(@RequestParam(value = "firstArgument") @Valid Double firstArgument,
                             @RequestParam(value = "secondArgument") @Valid Double secondArgument) {
-        return new Response(service.divide(firstArgument, secondArgument));
+        return new Response(calculatorService.divide(firstArgument, secondArgument));
     }
 
 }

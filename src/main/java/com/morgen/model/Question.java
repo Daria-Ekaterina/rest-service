@@ -1,11 +1,11 @@
-package com.morgen.bean;
+package com.morgen.model;
 
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "QUESTIONS")
+@Table(name = "questions")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,6 +1,6 @@
 package com.morgen.repository;
 
-import com.morgen.bean.Question;
+import com.morgen.model.Question;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

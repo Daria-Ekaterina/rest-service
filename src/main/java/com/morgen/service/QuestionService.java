@@ -1,6 +1,6 @@
 package com.morgen.service;
 
-import com.morgen.bean.Question;
+import com.morgen.model.Question;
 
 import java.util.List;
 
