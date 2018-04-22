@@ -6,36 +6,35 @@ import com.morgen.service.QuestionService;
 import com.morgen.utils.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
-public class CalculatorController {
+public class ServiceController {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(ServiceController.class);
     private final CalculatorService calculatorService;
-    private final Logger LOGGER=LoggerFactory.getLogger(CalculatorController.class);
-
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
     @Inject
-    public CalculatorController(CalculatorService calculatorService) {
+    public ServiceController(CalculatorService calculatorService, QuestionService questionService) {
+        this.questionService = questionService;
         this.calculatorService = calculatorService;
     }
 
-    @RequestMapping(value = "/questions", method = RequestMethod.GET)
+    @RequestMapping(value = "/randomquestions", method = RequestMethod.GET)
     public String findQuestion(Model model) {
-        List<Question> questions = questionService.findAll();
-        Question result = questions.get(getRandomQuestion(questions.size()));
-        LOGGER.info("Get random question from list: {}",result.getName());
+        Question result = questionService.getRandomQuestion();
+        LOGGER.info("Get random question from list: {}", result.getName());
         model.addAttribute("question", result);
-        return "questions";
+        return "randomquestions";
     }
 
     @RequestMapping(value = "/question/add", method = RequestMethod.POST)
@@ -43,18 +42,14 @@ public class CalculatorController {
         return null;
     }
 
-
-    private int getRandomQuestion(int size) {
-        return (int) (Math.random() * size);
-    }
     //TODO добавить result перемменную, для передачи в качестве параметра Response
     //TODO покрыть tests
 
     @RequestMapping("/add")
     private String add(Model model, @RequestParam(value = "firstArgument") @Valid Integer firstArgument,
                        @RequestParam(value = "secondArgument") @Valid Integer secondArgument) {
-        int result=calculatorService.add(firstArgument,secondArgument);
-        LOGGER.info("First argument: {}, second argument {}, action - add,result: {},result",firstArgument,secondArgument,result);
+        int result = calculatorService.add(firstArgument, secondArgument);
+        LOGGER.info("First argument: {}, second argument {}, action - add,result: {},result", firstArgument, secondArgument, result);
         model.addAttribute("firstArgument", firstArgument);
         model.addAttribute("secondArgument", secondArgument);
         model.addAttribute("sum", result);

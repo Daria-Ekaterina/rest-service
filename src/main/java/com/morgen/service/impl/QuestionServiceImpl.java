@@ -14,14 +14,26 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuestionServiceImpl.class);
 
-    @Autowired
     private QuestionRepository repository;
+
+    public QuestionServiceImpl(QuestionRepository questionRepository) {
+        this.repository=questionRepository;
+    }
 
     @Override
     public List<Question> findAll() {
         List<Question> questions = (List<Question>) repository.findAll();
-
         return questions;
+    }
+
+    @Override
+    public Question getRandomQuestion() {
+        List<Question> questions = findAll();
+        return questions.get(getRandomNum(questions));
+    }
+
+    private int getRandomNum(List<Question> sizeArrayOfQuestion){
+        return (int) (Math.random() * sizeArrayOfQuestion.size());
     }
 
     @Override

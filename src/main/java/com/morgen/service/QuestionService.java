@@ -8,4 +8,6 @@ public interface QuestionService {
     List<Question> findAll();
 
     Question addQuestion(Question question);
+
+    Question getRandomQuestion();
 }

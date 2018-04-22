@@ -8,4 +8,5 @@ public interface CalculatorService {
     int multiply(Integer firstArgument, Integer secondArgument);
 
     double divide(Double firstArgument, Double secondArgument);
+
 }
