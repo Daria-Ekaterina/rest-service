@@ -1,49 +1,28 @@
 package com.morgen.controller;
 
-import com.morgen.model.Question;
 import com.morgen.service.CalculatorService;
-import com.morgen.service.QuestionService;
 import com.morgen.utils.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 @Controller
-public class ServiceController {
+public class CalculatorController {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ServiceController.class);
+
+    private final Logger LOGGER = LoggerFactory.getLogger(CalculatorController.class);
     private final CalculatorService calculatorService;
-    private final QuestionService questionService;
 
     @Inject
-    public ServiceController(CalculatorService calculatorService, QuestionService questionService) {
-        this.questionService = questionService;
+    public CalculatorController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
     }
-
-    @RequestMapping(value = "/randomquestions", method = RequestMethod.GET)
-    public String findQuestion(Model model) {
-        Question result = questionService.getRandomQuestion();
-        LOGGER.info("Get random question from list: {}", result.getName());
-        model.addAttribute("question", result);
-        return "randomquestions";
-    }
-
-    @RequestMapping(value = "/question/add", method = RequestMethod.POST)
-    public String addQuestion(@RequestBody Question question) {
-        return null;
-    }
-
-    //TODO добавить result перемменную, для передачи в качестве параметра Response
-    //TODO покрыть tests
 
     @RequestMapping("/add")
     private String add(Model model, @RequestParam(value = "firstArgument") @Valid Integer firstArgument,
@@ -76,5 +55,6 @@ public class ServiceController {
                             @RequestParam(value = "secondArgument") @Valid Double secondArgument) {
         return new Response(calculatorService.divide(firstArgument, secondArgument));
     }
+
 
 }

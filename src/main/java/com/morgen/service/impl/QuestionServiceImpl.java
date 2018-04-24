@@ -5,7 +5,6 @@ import com.morgen.repository.QuestionRepository;
 import com.morgen.service.QuestionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuestionServiceImpl.class);
 
-    private QuestionRepository repository;
+    private final QuestionRepository repository;
 
     public QuestionServiceImpl(QuestionRepository questionRepository) {
         this.repository=questionRepository;
@@ -22,7 +21,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<Question> findAll() {
+        LOGGER.info("START repo findall");
         List<Question> questions = (List<Question>) repository.findAll();
+        LOGGER.info("END repo");
         return questions;
     }
 
@@ -41,6 +42,6 @@ public class QuestionServiceImpl implements QuestionService {
         //TODO сделать валидацию на поля
         LOGGER.info("Question name from ServiceImpl= {}",question.getName());
         repository.save(question);
-        return null;
+        return question;
     }
 }

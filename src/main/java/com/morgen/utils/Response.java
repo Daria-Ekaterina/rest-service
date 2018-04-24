@@ -10,8 +10,8 @@ import java.util.List;
 @Setter
 public class Response {
 
-    private ResponseStatus status;
-    private List<ResponseError> errors = new ArrayList<>();
+    private final ResponseStatus status;
+    private final List<ResponseError> errors = new ArrayList<>();
     private Object result;
 
     public Response() {

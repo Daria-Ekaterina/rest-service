@@ -1,6 +1,5 @@
 package com.morgen.model;
 
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,26 +7,26 @@ import java.util.Objects;
 @Table(name = "questions")
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private String answer;
 
     public Question() {
     }
 
-
     public Question(String name, String answer) {
         this.name = name;
-        this.answer=answer;
-    }
-
-    public long getId() {
-        return id;
+        this.answer = answer;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -45,8 +44,6 @@ public class Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-
-
 
     @Override
     public boolean equals(Object obj) {
@@ -82,6 +79,6 @@ public class Question {
     @Override
     public String toString() {
         return "Question{" + "id=" + id + ", name=" + name
-                + "answer="+answer+'}';
+                + "answer=" + answer + '}';
     }
 }
