@@ -1,10 +1,9 @@
 package com.morgen.repository;
 
-import com.morgen.model.Question;
+import com.morgen.model.Testing;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestionRepository extends CrudRepository<Question, Long> {
+public interface TestingRepository extends CrudRepository<Testing,Long> {
 }
-
