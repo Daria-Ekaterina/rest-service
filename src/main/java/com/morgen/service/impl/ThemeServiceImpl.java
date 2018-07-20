@@ -6,13 +6,16 @@ import com.morgen.repository.ThemeRepository;
 import com.morgen.service.ThemeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
 
+
+@Service("themeService")
 public class ThemeServiceImpl implements ThemeService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(QuestionServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThemeServiceImpl.class);
 
     private final ThemeRepository repository;
 
