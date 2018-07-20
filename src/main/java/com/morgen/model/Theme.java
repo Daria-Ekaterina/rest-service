@@ -1,7 +1,15 @@
 package com.morgen.model;//package com.morgen.model;
 
+
+import javax.persistence.*;
+
+
+@Entity
+@Table(name="theme")
 public class Theme {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     String name;

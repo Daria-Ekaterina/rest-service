@@ -2,6 +2,7 @@ package com.morgen.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "questions")
@@ -10,18 +11,25 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "Name")
     private String name;
+
+    @Column(name = "Answer")
     private String answer;
 
-    private Theme theme;
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Theme> theme;
 
     public Question() {
     }
 
-    public Question(String name, String answer,Theme theme) {
+    public Question(String name, String answer, Set<Theme> theme) {
         this.name = name;
         this.answer = answer;
-        this.theme=theme;
+        this.theme = theme;
     }
 
     public void setId(long id) {
@@ -48,13 +56,11 @@ public class Question {
         this.answer = answer;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "theme_id")
-    public Theme getTheme() {
+    public Set<Theme> getTheme() {
         return theme;
     }
 
-    public void setTheme(Theme theme) {
+    public void setTheme(Set<Theme> theme) {
         this.theme = theme;
     }
 

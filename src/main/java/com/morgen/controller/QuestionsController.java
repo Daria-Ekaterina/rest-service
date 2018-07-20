@@ -32,7 +32,6 @@ public class QuestionsController {
         Question result = questionService.getRandomQuestion();
         LOGGER.info("Get random question from list: {}", result.getName());
         model.addAttribute("question", result);
-        ParseHTML.getQuestionsForSave();
         return "randomquestions";
     }
 
