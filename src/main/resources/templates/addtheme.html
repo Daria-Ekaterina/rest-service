@@ -7,11 +7,10 @@
 <body>
 <h1>Form</h1>
 
-<form action="#" th:action="@{/questions/addquestion}" th:object="${question}" method="post">
-    <p>Theme: <input type="text" th:field="*{theme}" /></p>
-    <p>Question: <input type="text" th:field="*{name}" /></p>
-    <p>Answer: <input type="text" th:field="*{answer}" /></p>
+<form action="#" th:action="@{/questions/addtheme}" th:object="${theme}" method="post">
+    <p>Theme: <input type="text" th:field="*{name}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
+
 </body>
 </html>

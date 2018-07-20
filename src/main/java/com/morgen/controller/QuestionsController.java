@@ -1,8 +1,9 @@
 package com.morgen.controller;
 
 import com.morgen.model.Question;
+import com.morgen.model.Theme;
 import com.morgen.service.QuestionService;
-import com.morgen.utils.ParseHTML;
+import com.morgen.service.ThemeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,12 @@ public class QuestionsController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(QuestionsController.class);
     private final QuestionService questionService;
+    private final ThemeService themeService;
 
     @Inject
-    public QuestionsController(QuestionService questionService) {
+    public QuestionsController(QuestionService questionService, ThemeService themeService) {
         this.questionService = questionService;
+        this.themeService = themeService;
     }
 
     // CRUD
@@ -53,6 +56,20 @@ public class QuestionsController {
     public String addQuestion(@ModelAttribute Question question, Model model) {
         questionService.addQuestion(question);
         model.addAttribute("question", question);
+        return "result";
+    }
+
+
+    @RequestMapping(value = "/addtheme", method = RequestMethod.GET)
+    public String addTheme(Model model) {
+        model.addAttribute("theme", new Theme());
+        return "addtheme";
+    }
+
+    @RequestMapping(value = "/addtheme", method = RequestMethod.POST)
+    public String addQuestion(@ModelAttribute Theme theme, Model model) {
+        themeService.addTheme(theme);
+        model.addAttribute("theme", theme);
         return "result";
     }
 }
