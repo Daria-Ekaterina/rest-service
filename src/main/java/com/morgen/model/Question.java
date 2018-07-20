@@ -13,12 +13,15 @@ public class Question {
     private String name;
     private String answer;
 
+    private Theme theme;
+
     public Question() {
     }
 
-    public Question(String name, String answer) {
+    public Question(String name, String answer,Theme theme) {
         this.name = name;
         this.answer = answer;
+        this.theme=theme;
     }
 
     public void setId(long id) {
@@ -45,6 +48,14 @@ public class Question {
         this.answer = answer;
     }
 
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -63,6 +74,9 @@ public class Question {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
+        if (!Objects.equals(this.theme, other.theme)) {
+            return false;
+        }
         return Objects.equals(this.id, other.id);
 
     }
@@ -73,6 +87,7 @@ public class Question {
         hash = 79 * hash + Objects.hashCode(this.id);
         hash = 79 * hash + Objects.hashCode(this.name);
         hash = 79 * hash + Objects.hashCode(this.answer);
+        hash = 79 * hash+Objects.hashCode(this.theme);
         return hash;
     }
 
