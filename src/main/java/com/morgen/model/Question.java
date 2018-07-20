@@ -48,6 +48,8 @@ public class Question {
         this.answer = answer;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "theme_id")
     public Theme getTheme() {
         return theme;
     }
