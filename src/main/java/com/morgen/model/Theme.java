@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Theme {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     String name;

@@ -70,6 +70,6 @@ public class QuestionsController {
     public String addQuestion(@ModelAttribute Theme theme, Model model) {
         themeService.addTheme(theme);
         model.addAttribute("theme", theme);
-        return "result";
+        return "addthemeresponse";
     }
 }

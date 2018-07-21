@@ -101,7 +101,10 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" + "id=" + id + ", name=" + name
-                + "answer=" + answer + '}';
+        return "Question{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
     }
 }
