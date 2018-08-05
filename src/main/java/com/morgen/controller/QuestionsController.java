@@ -34,7 +34,7 @@ public class QuestionsController {
     public String findQuestion(Model model) {
         Question result = questionService.getRandomQuestion();
         LOGGER.info("Get random question from list: {}", result.getName());
-        model.addAttribute("question", result);
+        model.addAttribute("question", result.getName()+" "+result.getAnswer());
         return "randomquestions";
     }
 
