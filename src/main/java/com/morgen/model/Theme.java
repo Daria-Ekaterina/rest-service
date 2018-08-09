@@ -12,6 +12,7 @@ public class Theme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(name="name")
     String name;
 
     public Theme(Long id, String name) {

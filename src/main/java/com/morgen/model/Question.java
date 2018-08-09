@@ -1,6 +1,7 @@
 package com.morgen.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,10 +18,7 @@ public class Question {
     @Column(name = "Answer")
     private String answer;
 
-    @ManyToMany
-    @JoinTable(name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Theme> theme;
 
     public Question() {
