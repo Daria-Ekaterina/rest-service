@@ -18,13 +18,13 @@ public class Question {
     @Column(name = "Answer")
     private String answer;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private Set<Theme> theme;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Theme theme;
 
     public Question() {
     }
 
-    public Question(String name, String answer, Set<Theme> theme) {
+    public Question(String name, String answer, Theme theme) {
         this.name = name;
         this.answer = answer;
         this.theme = theme;
@@ -54,11 +54,11 @@ public class Question {
         this.answer = answer;
     }
 
-    public Set<Theme> getTheme() {
+    public Theme getTheme() {
         return theme;
     }
 
-    public void setTheme(Set<Theme> theme) {
+    public void setTheme(Theme theme) {
         this.theme = theme;
     }
 
@@ -103,6 +103,7 @@ public class Question {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", answer='" + answer + '\'' +
+                ", theme=" + theme.name +
                 '}';
     }
 }

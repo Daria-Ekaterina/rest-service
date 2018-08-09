@@ -33,8 +33,8 @@ public class QuestionsController {
     @RequestMapping(value = "/random", method = RequestMethod.GET)
     public String findQuestion(Model model) {
         Question result = questionService.getRandomQuestion();
-        LOGGER.info("Get random question from list: {}", result.getName());
-        model.addAttribute("question", result.getName()+" "+result.getAnswer());
+        LOGGER.info("Get random question theme: {}", result.getTheme().getName());
+        model.addAttribute("question", result.getName()+" "+result.getAnswer()+" "+ result.getTheme().getName());
         return "randomquestions";
     }
 
